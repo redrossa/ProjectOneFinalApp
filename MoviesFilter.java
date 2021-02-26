@@ -1,3 +1,5 @@
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,24 +9,59 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
+/**
+ * A MoviesFilter instance provides a way to filter movies listed in a given CSV file
+ * by genres and average ratings.
+ */
 public class MoviesFilter implements BackendInterface {
+    /** A hash table that maps strings of genres and ratings to sorted sets of MovieInterfaces. */
     private HashTableMap<String, SortedSet<MovieInterface>> moviesMap;
+
+    /** A list of all MovieInterfaces. */
     private List<MovieInterface> movies;
+
+    /** A list of genres selected as filter. */
     private List<String> genresFilter;
+
+    /** A list of all ratings selected as filter. */
     private List<String> ratingsFilter;
 
 
-    public MoviesFilter(String[] args) {
-        // TODO implement constructor from command line arguments
+    /**
+     * Initializes a MoviesFilter given the command line arguments.
+     * @param args the command line arguments whose zeroth element is
+     *        expected to be the path to a movies CSV file.
+     * @throws IOException if the named file does not exist,
+     *         is a directory rather than a regular file,
+     *         or for some other reason cannot be opened for
+     *         reading.
+     */
+    public MoviesFilter(String[] args) throws IOException {
+        this(new FileReader(args[0]));
     }
 
-    public MoviesFilter(Reader r) {
-        // TODO implement constructor from reader
+    /**
+     * Initializes a MoviesFilter given a Reader to a movies CSV file.
+     * @param r a Reader to a movies CSV file.
+     * @throws IOException if the named file does not exist,
+     *         is a directory rather than a regular file,
+     *         or for some other reason cannot be opened for
+     *         reading.
+     */
+    public MoviesFilter(Reader r) throws IOException {
+        movies = new MovieDataReader().readDataSet(r);
+        genresFilter = movies.stream()
+                .flatMap(m -> m.getGenres().stream())
+                .distinct()
+                .collect(Collectors.toList());
+        ratingsFilter = movies.stream()
+                .map(m -> String.valueOf(m.getAvgVote().intValue()))
+                .collect(Collectors.toList());
     }
 
     /**
      * Adds a genre into the filter.
-     * @param genre a genre to add into the filter
+     * @param genre a genre to add into the filter.
      */
     @Override
     public void addGenre(String genre) {
@@ -33,7 +70,7 @@ public class MoviesFilter implements BackendInterface {
 
     /**
      * Adds a rating into the filter.
-     * @param rating a rating to add into the filter
+     * @param rating a rating to add into the filter.
      */
     @Override
     public void addAvgRating(String rating) {
@@ -42,7 +79,7 @@ public class MoviesFilter implements BackendInterface {
 
     /**
      * Removes a genre in the filter.
-     * @param genre the genre in the filter to remove
+     * @param genre the genre in the filter to remove.
      */
     @Override
     public void removeGenre(String genre) {
@@ -51,7 +88,7 @@ public class MoviesFilter implements BackendInterface {
 
     /**
      * Removes a rating in the filter.
-     * @param rating the rating in the filter to remove
+     * @param rating the rating in the filter to remove.
      */
     @Override
     public void removeAvgRating(String rating) {
@@ -60,7 +97,7 @@ public class MoviesFilter implements BackendInterface {
 
     /**
      * Returns a list of genres in the filter.
-     * @return a list of genres in the filter
+     * @return a list of genres in the filter.
      */
     @Override
     public List<String> getGenres() {
@@ -78,7 +115,7 @@ public class MoviesFilter implements BackendInterface {
 
     /**
      * Returns a list of all movies that match the filter.
-     * @return a list of all movies that match the filter
+     * @return a list of all movies that match the filter.
      */
     private List<MovieInterface> getFilteredMovies() {
         List<String> filter = Stream.concat(genresFilter.stream(), ratingsFilter.stream())
@@ -91,7 +128,7 @@ public class MoviesFilter implements BackendInterface {
 
     /**
      * Returns the number of movies that match the filter.
-     * @return the number of movies that match the filter
+     * @return the number of movies that match the filter.
      */
     @Override
     public int getNumberOfMovies() {
@@ -100,7 +137,7 @@ public class MoviesFilter implements BackendInterface {
 
     /**
      * Returns a list of all genres of all movies in the internal dataset.
-     * @return a list of all genres of all movies in the internal dataset
+     * @return a list of all genres of all movies in the internal dataset.
      */
     @Override
     public List<String> getAllGenres() {
@@ -115,7 +152,7 @@ public class MoviesFilter implements BackendInterface {
      * movie rating in descending order. If there are less than three movies
      * left at the given index, the resulting list contains all those movies
      * (the list may be empty).
-     * @param startingIndex the given starting index
+     * @param startingIndex the given starting index.
      * @return a list of at most three movies that match the filter starting
      * at the movie at the given starting index ordered in descending order
      * of the ratings.
