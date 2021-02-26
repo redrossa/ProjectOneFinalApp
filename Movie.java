@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
 //--== CS400 File Header Information ==--
 //Name: Lilly Boyd
 //Email: laboyd2@wisc.edu
@@ -66,5 +68,23 @@ public class Movie implements MovieInterface {
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return year == movie.year &&
+                Float.compare(movie.avgVote, avgVote) == 0 &&
+                Objects.equals(title, movie.title) &&
+                Objects.equals(genres, movie.genres) &&
+                Objects.equals(director, movie.director) &&
+                Objects.equals(desc, movie.desc);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, year, genres, director, desc, avgVote);
     }
 }
