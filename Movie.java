@@ -1,7 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
 //--== CS400 File Header Information ==--
 //Name: Lilly Boyd
 //Email: laboyd2@wisc.edu
@@ -18,7 +17,15 @@ public class Movie implements MovieInterface {
     private String desc;
     private float avgVote;
 
-
+    /**
+     * Constructor to set values of each movie
+     * @param title - movie title
+     * @param year - year released
+     * @param genres - genres of movie
+     * @param director - director of movie
+     * @param desc - movie description
+     * @param avgVote - average vote of movie
+     */
     public Movie(String title, int year, String[] genres, String director, String desc, float avgVote) {
         this.title = title;
         this.year = year;
@@ -28,36 +35,56 @@ public class Movie implements MovieInterface {
         this.avgVote = avgVote;
     }
 
+    /**
+     * returns the title of the movie
+     */
     @Override
     public String getTitle() {
         return title;
     }
-
+    /**
+     * returns the year of the movie
+     */
     @Override
     public Integer getYear() {
         return year;
     }
 
+    /**
+     * returns the genres in for the movie
+     */
     @Override
     public List<String> getGenres() {
         return genres;
     }
 
+    /**
+     * returns name of director
+     */
     @Override
     public String getDirector() {
         return director;
     }
 
+    /**
+     * returns description for the movie
+     */
     @Override
     public String getDescription() {
         return desc;
     }
 
+    /**
+     * returns the average vote for the movie
+     */
     @Override
     public Float getAvgVote() {
         return avgVote;
     }
 
+    /**
+     * compares ratings between movies
+     */
     @Override
     public int compareTo(MovieInterface otherMovie) {
         if (this.getTitle().equals(otherMovie.getTitle())) {
@@ -69,7 +96,11 @@ public class Movie implements MovieInterface {
             return -1;
         }
     }
-
+    
+    /**
+     * overrides equals() to compare fields of movies to each other
+     * @param o - movie to be compared
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,6 +114,9 @@ public class Movie implements MovieInterface {
                 Objects.equals(desc, movie.desc);
     }
 
+    /**
+     * creates hash code for movie object
+     */
     @Override
     public int hashCode() {
         return Objects.hash(title, year, genres, director, desc, avgVote);
