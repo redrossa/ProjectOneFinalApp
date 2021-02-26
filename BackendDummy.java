@@ -45,7 +45,7 @@ public class BackendDummy implements BackendInterface {
      */
     @Override
     public void addAvgRating(String rating) {
-        // TODO: Fixme! Add dummy implementation similar to addGenre method.
+        System.out.println("Dummy backend; will ignore rating to add (" + rating + ")");
     }
 
     /**
@@ -54,7 +54,7 @@ public class BackendDummy implements BackendInterface {
      */
     @Override
     public void removeGenre(String genre) {
-        // TODO: Fixme! Add dummy implementation similar to addGenre method.
+        System.out.println("Dummy backend; will ignore genre to remove (" + genre + ")");
     }
 
     /**
@@ -63,7 +63,7 @@ public class BackendDummy implements BackendInterface {
      */
     @Override
     public void removeAvgRating(String rating) {
-        // TODO: Fixme! Add dummy implementation similar to addGenre method.
+        System.out.println("Dummy backend; will ignore genre to remove (" + rating + ")");
     }
 
     /**
@@ -81,8 +81,7 @@ public class BackendDummy implements BackendInterface {
      */
     @Override
     public List<String> getAvgRatings() {
-        // TODO: Fixme! Add dummy implementation similar to getGenres.
-        return null;
+        return Arrays.asList("3", "4", "5");
     }
 
     /**
@@ -153,8 +152,96 @@ public class BackendDummy implements BackendInterface {
             }
             
         });
-        // TODO: Fixme! Add two more example movies to the list before returning it (could be
-        //       ficticious ones).
+        movies.add(new MovieInterface() {
+
+            @Override
+            public String getTitle() {
+                return "STUFF";
+            }
+
+            @Override
+            public Integer getYear() {
+                return 1959;
+            }
+
+            @Override
+            public List<String> getGenres() {
+                return Arrays.asList(new String[] { "Action", "Comedy" });
+            }
+
+            @Override
+            public String getDirector() {
+                return "Ed Wood";
+            }
+
+            @Override
+            public String getDescription() {
+                return "Residents of California's San Fernando Valley are under attack by flying saucers from outer space.";
+            }
+
+            @Override
+            public Float getAvgVote() {
+                return 5.3f;
+            }
+
+            @Override
+            public int compareTo(MovieInterface otherMovie) {
+                if (this.getTitle().equals(otherMovie.getTitle())) {
+                    return 0;
+                    // sort by rating
+                } else if (this.getAvgVote() < otherMovie.getAvgVote()) {
+                    return +1;
+                } else {
+                    return -1;
+                }
+            }
+
+        });
+        movies.add(new MovieInterface() {
+
+            @Override
+            public String getTitle() {
+                return "WOW";
+            }
+
+            @Override
+            public Integer getYear() {
+                return 1959;
+            }
+
+            @Override
+            public List<String> getGenres() {
+                return Arrays.asList(new String[] { "Action", "Comedy" });
+            }
+
+            @Override
+            public String getDirector() {
+                return "Ed Wood";
+            }
+
+            @Override
+            public String getDescription() {
+                return "Residents of California's San Fernando Valley are under attack by flying saucers from outer space.";
+            }
+
+            @Override
+            public Float getAvgVote() {
+                return 5.3f;
+            }
+
+            @Override
+            public int compareTo(MovieInterface otherMovie) {
+                if (this.getTitle().equals(otherMovie.getTitle())) {
+                    return 0;
+                    // sort by rating
+                } else if (this.getAvgVote() < otherMovie.getAvgVote()) {
+                    return +1;
+                } else {
+                    return -1;
+                }
+            }
+
+        });
         return movies;
     }
 }
