@@ -2,10 +2,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
@@ -50,13 +54,26 @@ public class MoviesFilter implements BackendInterface {
      */
     public MoviesFilter(Reader r) throws IOException {
         movies = new MovieDataReader().readDataSet(r);
-        genresFilter = movies.stream()
+        genresFilter = new LinkedList<>();
+        ratingsFilter = new LinkedList<>();
+        List<String> genres = movies.stream()
                 .flatMap(m -> m.getGenres().stream())
                 .distinct()
                 .collect(Collectors.toList());
-        ratingsFilter = movies.stream()
-                .map(m -> String.valueOf(m.getAvgVote().intValue()))
-                .collect(Collectors.toList());
+        moviesMap = new HashTableMap<>(movies.size());
+        for (String genre : genres) {
+            SortedSet<MovieInterface> moviesWithGenre = movies.stream()
+                    .filter(m -> m.getGenres().contains(genre))
+                    .collect(Collectors.toCollection(TreeSet::new));
+            moviesMap.put(genre, moviesWithGenre);
+        }
+        for (int rating = 0; rating <= 10; rating++) {
+            int avgRate = rating;
+            SortedSet<MovieInterface> moviesWithRating = movies.stream()
+                    .filter(m -> avgRate <= m.getAvgVote() && m.getAvgVote() < avgRate + 1)
+                    .collect(Collectors.toCollection(TreeSet::new));
+            moviesMap.put(String.valueOf(rating), moviesWithRating);
+        }
     }
 
     /**
@@ -143,6 +160,7 @@ public class MoviesFilter implements BackendInterface {
     public List<String> getAllGenres() {
         return movies.stream()
                 .flatMap(m -> m.getGenres().stream())
+                .distinct()
                 .collect(Collectors.toList());
     }
 
