@@ -16,6 +16,10 @@ import java.util.List;
 // Notes to Grader: <optional extra notes>
 public class MovieDataReader implements MovieDataReaderInterface {
 
+  /**
+   * reads movie info from csv and creates Movie objects
+   * @param inputFileReader - file to be read from 
+   */
   @Override
   public List<MovieInterface> readDataSet(Reader inputFileReader)
       throws FileNotFoundException, IOException {
