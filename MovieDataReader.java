@@ -1,10 +1,12 @@
-import java.io.File;
+import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 // --== CS400 File Header Information ==--
 // Name: Lilly Boyd
@@ -19,27 +21,25 @@ public class MovieDataReader implements MovieDataReaderInterface {
   /**
    * reads movie info from csv and creates Movie objects
    * @param inputFileReader - file to be read from 
+   * @returns movies list
+   * @throws FileNotFoundException when file parameter doesn't match 
    */
   @Override
   public List<MovieInterface> readDataSet(Reader inputFileReader)
       throws FileNotFoundException, IOException {
-    // TODO: throw exceptions somehow
-    Scanner csvScanner = new Scanner(inputFileReader);
-    List<Movie> movies = new ArrayList<Movie>();
-    while (csvScanner.hasNext()) {
-      String line = csvScanner.nextLine();
-
-      Scanner lineScanner = new Scanner(line);
-      while (lineScanner.hasNext()) {
-        csvScanner = new Scanner(lineScanner.next());
-        csvScanner.useDelimiter(",");
-
+    List<MovieInterface> movies = new ArrayList<MovieInterface>();
+    String line = "";
+    String splitBy = ",";
+    BufferedReader br = new BufferedReader(inputFileReader);
+    // returns boolean value
+    while ((line = br.readLine()) != null) {
+      String movie[] = line.split(splitBy);
+      for (int i = 0; i < movie.length; i++) {
+       
       }
-      lineScanner.close();
     }
-    csvScanner.close();
-
-    return null;
+    
+    return movies;
   }
 
 }
