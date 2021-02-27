@@ -7,7 +7,10 @@ public class testDataReader {
   public static boolean test () {
     List<MovieInterface> movieList;
     try {
-      movieList = readerToTest.readDataSet(new FileReader("moviesOneGenre.csv"));
+      movieList = readerToTest.readDataSet(new FileReader("movies.csv"));
+      for (int i = 0; i < movieList.size(); i++) {
+        System.out.println(movieList.get(i).toString());
+      }
       
     }
     catch (Exception e) {
