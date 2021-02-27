@@ -115,7 +115,7 @@ public class Backend implements BackendInterface {
      */
     @Override
     public List<String> getGenres() {
-        return genresFilter;
+        return new ArrayList<>(genresFilter);
     }
 
     /**
@@ -124,7 +124,7 @@ public class Backend implements BackendInterface {
      */
     @Override
     public List<String> getAvgRatings() {
-        return ratingsFilter;
+        return new ArrayList<>(ratingsFilter);
     }
 
     /**
