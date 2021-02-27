@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 
 
 /**
- * A MoviesFilter instance provides a way to filter movies listed in a given CSV file
+ * A Backend instance provides a way to filter movies listed in a given CSV file
  * by genres and average ratings.
  */
-public class MoviesFilter implements BackendInterface {
+public class Backend implements BackendInterface {
     /** A hash table that maps strings of genres and ratings to sorted sets of MovieInterfaces. */
     private HashTableMap<String, SortedSet<MovieInterface>> moviesMap;
 
@@ -29,7 +29,7 @@ public class MoviesFilter implements BackendInterface {
 
 
     /**
-     * Initializes a MoviesFilter given the command line arguments.
+     * Initializes a Backend given the command line arguments.
      * @param args the command line arguments whose zeroth element is
      *        expected to be the path to a movies CSV file.
      * @throws IOException if the named file does not exist,
@@ -37,19 +37,19 @@ public class MoviesFilter implements BackendInterface {
      *         or for some other reason cannot be opened for
      *         reading.
      */
-    public MoviesFilter(String[] args) throws IOException {
+    public Backend(String[] args) throws IOException {
         this(new FileReader(args[0]));
     }
 
     /**
-     * Initializes a MoviesFilter given a Reader to a movies CSV file.
+     * Initializes a Backend given a Reader to a movies CSV file.
      * @param r a Reader to a movies CSV file.
      * @throws IOException if the named file does not exist,
      *         is a directory rather than a regular file,
      *         or for some other reason cannot be opened for
      *         reading.
      */
-    public MoviesFilter(Reader r) throws IOException {
+    public Backend(Reader r) throws IOException {
         movies = new MovieDataReader().readDataSet(r);
         genresFilter = new LinkedList<>();
         ratingsFilter = new LinkedList<>();
