@@ -4,12 +4,9 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.function.IntUnaryOperator;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
@@ -135,6 +132,8 @@ public class MoviesFilter implements BackendInterface {
      * @return a list of all movies that match the filter.
      */
     private List<MovieInterface> getFilteredMovies() {
+        if (genresFilter.isEmpty())
+            return new ArrayList<>();
         List<String> filter = Stream.concat(genresFilter.stream(), ratingsFilter.stream())
                 .collect(Collectors.toList());
         SortedSet<MovieInterface> moviesSet = new TreeSet<>(movies);
@@ -181,7 +180,7 @@ public class MoviesFilter implements BackendInterface {
         try {
             return movies.subList(startingIndex, startingIndex + 3);
         } catch (IndexOutOfBoundsException e) {
-            int size = getNumberOfMovies();
+            int size = movies.size();
             return (startingIndex < size) ? movies.subList(startingIndex, size) : new ArrayList<>();
         }
     }
