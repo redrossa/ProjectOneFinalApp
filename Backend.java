@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -137,7 +138,7 @@ public class Backend implements BackendInterface {
                 .collect(Collectors.toList());
         SortedSet<MovieInterface> moviesSet = new TreeSet<>(movies);
         for (String key : filter)
-            moviesSet.retainAll(moviesMap.get(key));
+            moviesSet.retainAll(new ArrayList<>(moviesMap.get(key)));
         return new ArrayList<>(moviesSet);
     }
 
