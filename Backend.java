@@ -27,7 +27,6 @@ public class Backend implements BackendInterface {
     /** A list of all ratings selected as filter. */
     private List<String> ratingsFilter;
 
-
     /**
      * Initializes a Backend given the command line arguments.
      * @param args the command line arguments whose zeroth element is
@@ -131,8 +130,8 @@ public class Backend implements BackendInterface {
      * Returns a list of all movies that match the filter.
      * @return a list of all movies that match the filter.
      */
-    private List<MovieInterface> getFilteredMovies() {
-        if (genresFilter.isEmpty())
+    public List<MovieInterface> getFilteredMovies() {
+        if (genresFilter.isEmpty() || ratingsFilter.isEmpty())
             return new ArrayList<>();
         List<String> filter = Stream.concat(genresFilter.stream(), ratingsFilter.stream())
                 .collect(Collectors.toList());
