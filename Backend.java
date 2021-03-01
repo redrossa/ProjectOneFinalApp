@@ -1,17 +1,13 @@
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 /**
@@ -143,12 +139,11 @@ public class Backend implements BackendInterface {
         for (String ratings : ratingsFilter)
                 moviesSet.addAll(moviesMap.get(ratings));
 
-
         if (!genresFilter.contains("all"))
             for (String genre : genresFilter)
                 moviesSet.retainAll(new ArrayList<>(moviesMap.get(genre)));
 
-        return movies.stream().sorted().collect(Collectors.toList());
+        return moviesSet.stream().sorted().collect(Collectors.toList());
     }
 
     /**
