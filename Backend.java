@@ -133,11 +133,11 @@ public class Backend implements BackendInterface {
      * Returns a list of all movies that match the filter.
      * @return a list of all movies that match the filter.
      */
-    private List<MovieInterface> getFilteredMovies() {
+    public List<MovieInterface> getFilteredMovies() {
         if (genresFilter.isEmpty() || ratingsFilter.isEmpty())
             return new ArrayList<>();
 
-        SortedSet<MovieInterface> moviesSet = new TreeSet<>();
+        Set<MovieInterface> moviesSet = new HashSet<>();
 
         for (String ratings : ratingsFilter)
                 moviesSet.addAll(moviesMap.get(ratings));
@@ -148,7 +148,7 @@ public class Backend implements BackendInterface {
         for (String genre : genresFilter)
             moviesSet.retainAll(new ArrayList<>(moviesMap.get(genre)));
 
-        return new ArrayList<>(moviesSet);
+        return moviesSet.stream().sorted().collect(Collectors.toList());
     }
 
     /**
