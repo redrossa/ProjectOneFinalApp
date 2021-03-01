@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -142,13 +143,12 @@ public class Backend implements BackendInterface {
         for (String ratings : ratingsFilter)
                 moviesSet.addAll(moviesMap.get(ratings));
 
-        if (genresFilter.contains("all"))
-            return new ArrayList<>(moviesSet);
 
-        for (String genre : genresFilter)
-            moviesSet.retainAll(new ArrayList<>(moviesMap.get(genre)));
+        if (!genresFilter.contains("all"))
+            for (String genre : genresFilter)
+                moviesSet.retainAll(new ArrayList<>(moviesMap.get(genre)));
 
-        return moviesSet.stream().sorted().collect(Collectors.toList());
+        return movies.stream().sorted().collect(Collectors.toList());
     }
 
     /**
