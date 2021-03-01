@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 
@@ -15,11 +13,11 @@ import java.util.stream.Collectors;
  * by genres and average ratings.
  */
 public class Backend implements BackendInterface {
-    /** A hash table that maps strings of genres and ratings to sorted sets of MovieInterfaces. */
-    private HashTableMap<String, SortedSet<MovieInterface>> moviesMap;
-
     /** A list of all MovieInterfaces. */
     private List<MovieInterface> movies;
+
+    /** A hash table that maps strings of genres and ratings to sorted sets of MovieInterfaces. */
+    private HashTableMap<String, Set<MovieInterface>> moviesMap;
 
     /** A list of genres selected as filter. */
     private Set<String> genresFilter;
@@ -50,24 +48,30 @@ public class Backend implements BackendInterface {
      */
     public Backend(Reader r) throws IOException {
         movies = new MovieDataReader().readDataSet(r);
+        moviesMap = new HashTableMap<>(movies.size());
         genresFilter = new HashSet<>();
         ratingsFilter = new HashSet<>();
+
+        // get all genres in the movies list
         List<String> genres = movies.stream()
                 .flatMap(m -> m.getGenres().stream())
                 .distinct()
                 .collect(Collectors.toList());
-        moviesMap = new HashTableMap<>(movies.size());
+
+        // for each genre, put into moviesMap the genre and a list of all movies containing that genre
         for (String genre : genres) {
-            SortedSet<MovieInterface> moviesWithGenre = movies.stream()
+            Set<MovieInterface> moviesWithGenre = movies.stream()
                     .filter(m -> m.getGenres().contains(genre))
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(HashSet::new));
             moviesMap.put(genre, moviesWithGenre);
         }
+
+        // for each possible rating range, put into moviesMap the rating and a list of all movies in that rating range
         for (int rating = 0; rating <= 10; rating++) {
             int avgRate = rating;
-            SortedSet<MovieInterface> moviesWithRating = movies.stream()
+            Set<MovieInterface> moviesWithRating = movies.stream()
                     .filter(m -> avgRate <= m.getAvgVote() && m.getAvgVote() < avgRate + 1)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(HashSet::new));
             moviesMap.put(String.valueOf(rating), moviesWithRating);
         }
     }
@@ -130,19 +134,23 @@ public class Backend implements BackendInterface {
      * Returns a list of all movies that match the filter.
      * @return a list of all movies that match the filter.
      */
-    public List<MovieInterface> getFilteredMovies() {
+    private List<MovieInterface> getFilteredMovies() {
+        // genres and ratings must be specified
         if (genresFilter.isEmpty() || ratingsFilter.isEmpty())
             return new ArrayList<>();
 
         Set<MovieInterface> moviesSet = new HashSet<>();
 
+        // get all movies in the specified ratings ranges
         for (String ratings : ratingsFilter)
-                moviesSet.addAll(moviesMap.get(ratings));
+            moviesSet.addAll(moviesMap.get(ratings));
 
+        // if all is not specified, get all movies in the specified ratings ranges that contain the specified genres
         if (!genresFilter.contains("all"))
             for (String genre : genresFilter)
-                moviesSet.retainAll(new ArrayList<>(moviesMap.get(genre)));
+                moviesSet.retainAll(moviesMap.get(genre));
 
+        // return a sorted list of the set of selected movies
         return moviesSet.stream().sorted().collect(Collectors.toList());
     }
 
@@ -185,6 +193,9 @@ public class Backend implements BackendInterface {
             return movies.subList(startingIndex, startingIndex + 3);
         } catch (IndexOutOfBoundsException e) {
             int size = movies.size();
+            // this means there is less than 3 movies at and after the starting index
+            // therefore if startingIndex is less than size (because there are still movies) return sublist until
+            // the end otherwise, there is none (so an empty list)
             return (startingIndex < size) ? movies.subList(startingIndex, size) : new ArrayList<>();
         }
     }
