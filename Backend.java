@@ -3,8 +3,10 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -23,10 +25,10 @@ public class Backend implements BackendInterface {
     private List<MovieInterface> movies;
 
     /** A list of genres selected as filter. */
-    private List<String> genresFilter;
+    private Set<String> genresFilter;
 
     /** A list of all ratings selected as filter. */
-    private List<String> ratingsFilter;
+    private Set<String> ratingsFilter;
 
     /**
      * Initializes a Backend given the command line arguments.
@@ -51,8 +53,8 @@ public class Backend implements BackendInterface {
      */
     public Backend(Reader r) throws IOException {
         movies = new MovieDataReader().readDataSet(r);
-        genresFilter = new LinkedList<>();
-        ratingsFilter = new LinkedList<>();
+        genresFilter = new HashSet<>();
+        ratingsFilter = new HashSet<>();
         List<String> genres = movies.stream()
                 .flatMap(m -> m.getGenres().stream())
                 .distinct()
@@ -131,14 +133,21 @@ public class Backend implements BackendInterface {
      * Returns a list of all movies that match the filter.
      * @return a list of all movies that match the filter.
      */
-    public List<MovieInterface> getFilteredMovies() {
+    private List<MovieInterface> getFilteredMovies() {
         if (genresFilter.isEmpty() || ratingsFilter.isEmpty())
             return new ArrayList<>();
-        List<String> filter = Stream.concat(genresFilter.stream(), ratingsFilter.stream())
-                .collect(Collectors.toList());
-        SortedSet<MovieInterface> moviesSet = new TreeSet<>(movies);
-        for (String key : filter)
-            moviesSet.retainAll(new ArrayList<>(moviesMap.get(key)));
+
+        SortedSet<MovieInterface> moviesSet = new TreeSet<>();
+
+        for (String ratings : ratingsFilter)
+                moviesSet.addAll(moviesMap.get(ratings));
+
+        if (genresFilter.contains("all"))
+            return new ArrayList<>(moviesSet);
+
+        for (String genre : genresFilter)
+            moviesSet.retainAll(new ArrayList<>(moviesMap.get(genre)));
+
         return new ArrayList<>(moviesSet);
     }
 
