@@ -1,12 +1,9 @@
 import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
-import com.opencsv.exceptions.CsvValidationException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 // --== CS400 File Header Information ==--
 // Name: Lilly Boyd
@@ -43,6 +40,7 @@ public class MovieDataReader implements MovieDataReaderInterface {
       movies.add(new Movie(line[0], Integer.parseInt(yearVal), genres, line[7], line[11],
           Float.parseFloat(line[12])));
     }
+    reader.close();
     return movies;
   }
 
