@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class Main {
   public static void main(String[] args) throws IOException {
-    FrontendInterface frontend = new FrontendInterface();
+    Frontend frontend = new Frontend();
     frontend.main(args);
   }
 }

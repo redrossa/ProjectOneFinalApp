@@ -8,14 +8,14 @@ run: compile
 	#commons-beanutils-1.9.4.jar:" *.java
 	java $(CP) Main movies.csv
 
-# Main.class requires FrontendInterface.class
-Main.class: Main.java FrontendInterface.java
+# Main.class requires Frontend.class
+Main.class: Main.java Frontend.java
 	javac $(CP) Main.java
-	javac $(CP) FrontendInterface.java
+	javac $(CP) Frontend.java
 	
 
 # FrontEnd Requires that a Backend be initalized
-FrontendInterface.class: Backend.java BackendInterface.java
+Frontend.class: Backend.java BackendInterface.java
 	javac $(CP) Backend.java
 	javac $(CP) BackendInterface.java
 	
@@ -29,7 +29,7 @@ MovieDataReader.class: Movie.java MovieDataReader.java
 	javac $(CP) Movie.java
 	javac $(CP) MovieDataReader.java
 
-compile: Main.class FrontendInterface.class Backend.class MovieDataReader.class
+compile: Main.class Frontend.class Backend.class MovieDataReader.class
 
 test: testData testBackend testFrontend
 
