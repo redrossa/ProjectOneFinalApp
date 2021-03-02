@@ -1,3 +1,11 @@
+// --== CS400 File Header Information ==--
+// Name: Mayank Dornala
+// Email: dornala@wisc.edu
+// Team: Blue
+// Group: JF
+// TA: Xinyi
+// Lecturer: Dahl
+// Notes to Grader:
 import java.util.NoSuchElementException;
 
 
