@@ -1,3 +1,12 @@
+// --== CS400 File Header Information ==--
+// Name: Reno Raksi
+// Email: raksi@wisc.edu
+// Team: blue
+// Role: backend
+// TA: Xinyi
+// Lecturer: Florian
+// Notes to Grader: <optional extra notes>
+
 import java.io.StringReader;
 import java.util.List;
 
