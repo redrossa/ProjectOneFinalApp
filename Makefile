@@ -45,7 +45,7 @@ testDataReader.class: testDataReader.java
 	javac $(CP) testDataReader.java
 
 testMovieAndDataReader.class:
-	javac $(CP) testMovieAndDataReaderjava
+	javac $(CP) testMovieAndDataReader.java
 	
 clean:
 	$(RM) *.class
