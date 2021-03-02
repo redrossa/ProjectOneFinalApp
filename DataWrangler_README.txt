@@ -17,4 +17,6 @@ Additional Contributions:
 Signature:
 ----------
 Lilly Boyd
+
+Imported OpenCSV library to sort through CSV file, used in MovieDataReader class
  
