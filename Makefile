@@ -33,13 +33,18 @@ test: testData testBackend testFrontend
 testFrontend: 
 	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
 
-testBackend: Backend.class testBackend.java
-	java Backend
+testBackend: Backend.class testBackend.class
+	java testBackEnd
+	
+testBackend.class: testBackend.java
 	javac $(CP) testBackend.java
 
-testData: MovieDataReader.class testDataReader.java testMovieAndDataReader.java
-	java MovieDataReader
+testData: MovieDataReader.class testDataReader.class testMovieAndDataReader.class
+	
+testDataReader.class: testDataReader.java
 	javac $(CP) testDataReader.java
+
+testMovieAndDataReader.class:
 	javac $(CP) testMovieAndDataReaderjava
 	
 clean:
