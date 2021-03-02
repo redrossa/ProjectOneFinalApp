@@ -39,13 +39,13 @@ testBackend: Backend.class TestBackend.class
 testBackend.class: TestBackend.java
 	javac $(CP) TestBackend.java
 
-testData: MovieDataReader.class testDataReader.class TestMovieAndDataReader.class
+testData: MovieDataReader.class testDataReader.class TestMovieAndMovieDataReader.class
 	java MovieDataReader
 	
 testDataReader.class: testDataReader.java
 	javac $(CP) testDataReader.java
 
-TestMovieAndDataReader.class: TestMovieAndDataReader.java
+TestMovieAndDataReader.class: TestMovieAndMovieDataReader.java
 	javac $(CP) TestMovieAndDataReader.java
 	
 clean:
