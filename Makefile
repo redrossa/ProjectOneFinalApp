@@ -7,7 +7,7 @@ run: Main.class
 	
 # Main.class requires FrontendInterface.class
 Main.class: Main.java FrontendInterface.java
-	javac Main.java movies.csv
+	javac Main.java 
 	javac FrontendInterface.java
 	
 
@@ -18,15 +18,18 @@ FrontendInterface.class: Backend.java BackendInterface.java
 	
 # Backend has 3 dependencies:	
 Backend.class: MovieInterfacejava HashTableMap.java MapADT.java
-	javac MovieInterface.java
+	javac -cp "opencsv-5.3.jar:commons-text-1.9.jar:commons-logging-1.2.jar:commons-lang3-3.11.jar:comomons-collections-3.2.2.jar:commons-collections4-4.4.jar:
+	 commons-beanutils-1.9.4.jar:" MovieInterface.java
 	javac MapADT.java
 	javac HashTableMap.java
 	
-MovieInterface.class: Movie.java MovieInterfaceReader.java
-	javac Movie.java
+MovieDataReader.class: Movie.java MovieInterfaceReader.java 
+	javac -cp "opencsv-5.3.jar:commons-text-1.9.jar:commons-logging-1.2.jar:commons-lang3-3.11.jar:comomons-collections-3.2.2.jar:commons-collections4-4.4.jar:
+	 commons-beanutils-1.9.4.jar:" Movie.java
 	javac MovieInterfaceReader.java
 	
-	
+
+
 	
 compile:
 	@echo "FIXME: *make compile* should compile the code for your project"
