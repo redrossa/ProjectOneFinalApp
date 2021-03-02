@@ -30,7 +30,7 @@ HashTableMap.java
 
 Instructions to Build, Run and Test your Project:
 -------------------------------------------------
-"make" , "make run", or "make compile" will all Build and Run the program
+"make compile" then "make run"  or just "make run" will build and run the program
 
 "make test" will show tests for DataInput, FrontEnd, and BackEnd
 
