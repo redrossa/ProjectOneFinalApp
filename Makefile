@@ -13,7 +13,7 @@ Main.class: Main.java FrontendInterface.java
 
 # FrontEnd Requires that a Backend be initalized
 FrontendInterface.class: Backend.java BackendInterface.java
-	javac Backend.java
+	javac -cp "opencsv-5.3.jar:commons-text-1.9.jar:commons-logging-1.2.jar:commons-lang3-3.11.jar:comomons-collections-3.2.2.jar:commons-collections4-4.4.jar:commons-beanutils-1.9.4.jar:" Backend.java
 	javac BackendInterface.java
 	
 # Backend has 3 dependencies:	
