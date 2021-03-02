@@ -1,12 +1,3 @@
-// --== CS400 File Header Information ==--
-// Name: Reno Raksi
-// Email: raksi@wisc.edu
-// Team: blue
-// Group: JF
-// TA: Xinyi
-// Lecturer: Florian
-// Notes to Grader: <optional extra notes>
-
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Objects;
