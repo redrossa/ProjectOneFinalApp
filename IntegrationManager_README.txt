@@ -1,33 +1,51 @@
 IntegrationManager README for Project One (CS400 @ UW Madison)
 ========================================================
 
-Name of IntegrationManager: <enter your complete name here>
-@wisc.edu Email of IntegrationManager: <enter your @wisc.edu email address here>
-Group: <enter your two letter group name here>
-Team: <enter your team color: red, blue, or purple, here>
+Name of IntegrationManager: Mayank Reddy Dornala
+@wisc.edu Email of IntegrationManager: dornala@wisc.edu
+Group: JF
+Team: blue
 
 Complete List of Files:
 -----------------------
-<List all files that are a part of this project along with the name of the team
- member(s) who were most responsible for implementing the computation within
- each of these files.>
+Lily Boyd - Data Wrangler: 
+Movie.java
+MovieDataReader.java
+testDataReader.java
+TestMovieAndMovieDataReader.java
+
+Yuven Sundaramoorthy - Frontend: 
+Frontend.java
+Main.java
+
+Reno Raksi - Backend
+Backend.java
+BackendDummyjava
+TestBackend.java
+
+Mayank Dornala - Integration
+HashTableMap.java
+
+*Remaining Files are .jar files, ReadMe's, or provided interfaces.
 
 Instructions to Build, Run and Test your Project:
 -------------------------------------------------
-<Describe here any instructions that will be needed by course staff to build,
- run, and test this project.>
+"make" , "make run", or "make compile" will all Build and Run the program
+
+"make test" will show tests for DataInput, FrontEnd, and BackEnd
+
+Instructions for using Program: 
+1. 
+
 
 Team Member Contributions:
 --------------------------
-<List the efforts of any members on your team that went above the team's
- expectations for their contributions to this project.  Also identify any
- ways that team members failed to meet the expectations of the group, for
- example: missed deadlines, lack of communication, lack of effort, etc.>
+ No Team Members failed to meet expectations. 
+ Reno Raksi did go above expectations. He assisted with fixing Frontend bugs and helped me finish up the makefile. 
+ Lily and Yuven also did a great job learning on the fly and making sure they were staying on track. 
+ Everyone filled their roles well and delievered their parts on time and correctly. 
 
 Signature:
 ----------
-<Type out your full name here to certify that to the best of your understanding,
- the contents of this submission represent the efforts of your team members. If
- you are aware of any exceptions to this, please describe them here below your
- name.>
+Mayank Reddy Dornala
  
