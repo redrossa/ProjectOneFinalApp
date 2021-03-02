@@ -45,8 +45,8 @@ testData: MovieDataReader.class testDataReader.class TestMovieAndMovieDataReader
 testDataReader.class: testDataReader.java
 	javac $(CP) testDataReader.java
 
-TestMovieAndDataReader.class: TestMovieAndMovieDataReader.java
-	javac $(CP) TestMovieAndDataReader.java
+TestMovieAndMovieDataReader.class: TestMovieAndMovieDataReader.java
+	javac $(CP) TestMovieAndMovieDataReader.java
 	
 clean:
 	$(RM) *.class
