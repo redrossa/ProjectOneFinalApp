@@ -36,7 +36,7 @@ testFrontend:
 testBackend: Backend.class TestBackend.class
 	java TestBackEnd
 	
-testBackend.class: TestBackend.java
+TestBackend.class: TestBackend.java
 	javac $(CP) TestBackend.java
 
 testData: MovieDataReader.class testDataReader.class TestMovieAndMovieDataReader.class
