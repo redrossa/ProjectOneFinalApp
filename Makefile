@@ -40,6 +40,7 @@ testBackend.class: TestBackend.java
 	javac $(CP) TestBackend.java
 
 testData: MovieDataReader.class TestDataReader.class TestMovieAndDataReader.class
+	java MovieDataReader
 	
 testDataReader.class: testDataReader.java
 	javac $(CP) testDataReader.java
