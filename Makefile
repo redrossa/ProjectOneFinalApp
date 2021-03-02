@@ -3,9 +3,6 @@ CP := -cp "opencsv-5.3.jar:commons-text-1.9.jar:commons-logging-1.2.jar:commons-
 default: run
 
 run: compile
-	# Main.java: initializes frontend 
-	#javac -cp "opencsv-5.3.jar:commons-text-1.9.jar:commons-logging-1.2.jar:commons-lang3-3.11.jar:comomons-collections-3.2.2.jar:commons-collections4-4.4.jar:
-	#commons-beanutils-1.9.4.jar:" *.java
 	java $(CP) Main movies.csv
 
 # Main.class requires Frontend.class
@@ -33,14 +30,17 @@ compile: Main.class Frontend.class Backend.class MovieDataReader.class
 
 test: testData testBackend testFrontend
 
-testFrontend:
+testFrontend: 
 	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
 
-testBackend:
-	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
+testBackend: Backend.class testBackend.java
+	java Backend
+	javac $(CP) testBackend.java
 
-testData:
-	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
-
+testData: MovieDataReader.class testDataReader.java testMovieAndDataReader.java
+	java MovieDataReader
+	javac $(CP) testDataReader.java
+	javac $(CP) testMovieAndDataReaderjava
+	
 clean:
 	$(RM) *.class
