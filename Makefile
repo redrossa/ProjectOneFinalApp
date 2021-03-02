@@ -8,7 +8,6 @@ run: compile
 	#commons-beanutils-1.9.4.jar:" *.java
 	java $(CP) Main movies.csv
 
-
 # Main.class requires FrontendInterface.class
 Main.class: Main.java FrontendInterface.java
 	javac $(CP) Main.java
@@ -29,7 +28,6 @@ Backend.class: MovieInterface.java HashTableMap.java MapADT.java
 MovieDataReader.class: Movie.java MovieDataReader.java
 	javac $(CP) Movie.java
 	javac $(CP) MovieDataReader.java
-
 
 compile: Main.class FrontendInterface.class Backend.class MovieDataReader.class
 
