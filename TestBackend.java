@@ -1,4 +1,5 @@
 import java.io.StringReader;
+import java.util.List;
 
 /**
  * This class contains a set of tests for the back end of the Movie Mapper project.
@@ -16,7 +17,7 @@ public class TestBackend {
 		System.out.println("Test get all genres: " + (testGetAllGenres() ? "PASSED" : "FAILED"));
 		System.out.println("Test get three movies sorted by rating: " + (testGetThreeMoviesInitial() ? "PASSED" : "FAILED"));
 		System.out.println("Test get number of movies: " + (testGetNumberOfMovies() ? "PASSED" : "FAILED"));
-		System.out.println("Test get average ratings: " + (testGetAvgRatings() ? "PASSED" : "FAILED"));
+		System.out.println("Test get three movies: " + (testGetThreeMovies() ? "PASSED" : "FAILED"));
 	}
 	
 	/**
@@ -115,8 +116,8 @@ public class TestBackend {
 
 	/**
 	 * This test instantiates the back end with three movies and tests whether
-	 * the getNumberOfMovies method return the correct number of movies for those three
-	 * movies.
+	 * the getNumberOfMovies method return the correct number of movies for the
+	 * selected genres and ratings.
 	 * @return true if the test passed, false if it failed
 	 */
 	public boolean testGetNumberOfMovies() {
@@ -128,13 +129,10 @@ public class TestBackend {
 					+ "The Insurrection,The Insurrection,2020,Action,90,USA,English,Rene Perez,Rene Perez,,\"Michael Paré, Wilma Elles, Joseph Camilleri, Rebecca Tarabocchia, Jeanine Harrington, Malorie Glavan, Danner Boyd, Michael Cendejas, Woody Clendenen, Keely Dervin, Aaron Harvey, Tony Jackson, Michael Jarrod, Angelina Karo, Bernie Kelly\",The director of the largest media company wants to expose how left-wing powers use film to control populations.,2.9\n"
 					+ "Valley Girl,Valley Girl,2020,\"Comedy, Musical, Romance\",102,USA,English,Rachel Lee Goldenberg,\"Amy Talkington, Andrew Lane\",Sneak Preview Productions,\"Jessica Rothe, Josh Whitehouse, Jessie Ennis, Ashleigh Murray, Chloe Bennet, Logan Paul, Mae Whitman, Mario Revolori, Rob Huebel, Judy Greer, Alex Lewis, Alex MacNicoll, Danny Ramirez, Andrew Kai, Allyn Rachel\",\"Set to a new wave '80s soundtrack, a pair of young lovers from different backgrounds defy their parents and friends to stay together. A musical adaptation of the 1983 film.\",5.4\n"
 			));
-			if (backendToTest.getNumberOfMovies() == 3) {
-				// test passed
-				return true;
-			} else {
-				// test failed
-				return false;
-			}
+			backendToTest.addGenre("Horror");
+			for (int i = 0; i <= 10; i++)
+				backendToTest.addAvgRating(String.valueOf(i));
+			return backendToTest.getNumberOfMovies() == 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			// test failed
@@ -144,11 +142,11 @@ public class TestBackend {
 
 	/**
 	 * This test instantiates the back end with three movies and tests whether
-	 * the getAvgRatings method return the correct set of average ratings for those
-	 * three movies.
+	 * the getThreeMovies return the correct movies according to the selected
+	 * genres and ratings.
 	 * @return true if the test passed, false if it failed
 	 */
-	public boolean testGetAvgRatings() {
+	public boolean testGetThreeMovies() {
 		try {
 			// instantiate once BackendInterface is implemented
 			BackendInterface backendToTest = new Backend(new StringReader(
@@ -157,16 +155,11 @@ public class TestBackend {
 					+ "The Insurrection,The Insurrection,2020,Action,90,USA,English,Rene Perez,Rene Perez,,\"Michael Paré, Wilma Elles, Joseph Camilleri, Rebecca Tarabocchia, Jeanine Harrington, Malorie Glavan, Danner Boyd, Michael Cendejas, Woody Clendenen, Keely Dervin, Aaron Harvey, Tony Jackson, Michael Jarrod, Angelina Karo, Bernie Kelly\",The director of the largest media company wants to expose how left-wing powers use film to control populations.,2.9\n"
 					+ "Valley Girl,Valley Girl,2020,\"Comedy, Musical, Romance\",102,USA,English,Rachel Lee Goldenberg,\"Amy Talkington, Andrew Lane\",Sneak Preview Productions,\"Jessica Rothe, Josh Whitehouse, Jessie Ennis, Ashleigh Murray, Chloe Bennet, Logan Paul, Mae Whitman, Mario Revolori, Rob Huebel, Judy Greer, Alex Lewis, Alex MacNicoll, Danny Ramirez, Andrew Kai, Allyn Rachel\",\"Set to a new wave '80s soundtrack, a pair of young lovers from different backgrounds defy their parents and friends to stay together. A musical adaptation of the 1983 film.\",5.4\n"
 			));
-			if (backendToTest.getAvgRatings().size() == 3
-					&& backendToTest.getAvgRatings().contains("3.5")
-					&& backendToTest.getAvgRatings().contains("2.9")
-					&& backendToTest.getAvgRatings().contains("5.4")) {
-				// test passed
-				return true;
-			} else {
-				// test failed
-				return false;
-			}
+			backendToTest.addGenre("Horror");
+			for (int i = 0; i <= 10; i++)
+				backendToTest.addAvgRating(String.valueOf(i));
+			List<MovieInterface> movies = backendToTest.getThreeMovies(0);
+			return movies.size() == 1 && movies.get(0).getGenres().contains("Horror");
 		} catch (Exception e) {
 			e.printStackTrace();
 			// test failed
