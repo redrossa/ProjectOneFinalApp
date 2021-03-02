@@ -42,8 +42,9 @@ Team Member Contributions:
 --------------------------
  No Team Members failed to meet expectations. 
  Reno Raksi did go above expectations. He assisted with fixing Frontend bugs and helped me finish up the makefile. 
- Lily and Yuven also did a great job learning on the fly and making sure they were staying on track. 
- Everyone filled their roles well and delievered their parts on time and correctly. 
+ Lily and Yuven also did a great job learning on the fly and making sure they were staying on track. They also 
+ helped with Backend bugs and editing the makefile. 
+ Everyone filled their roles well, delievered their parts on time and correctly, and collaborated well to deliver the finished product.  
 
 Signature:
 ----------
