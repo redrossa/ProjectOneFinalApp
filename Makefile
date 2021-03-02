@@ -28,7 +28,7 @@ MovieDataReader.class: Movie.java MovieDataReader.java
 
 compile: Main.class Frontend.class Backend.class MovieDataReader.class
 
-test: testData testBackend testFrontend
+test: compile testData testBackend testFrontend
 
 testFrontend: 
 	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
