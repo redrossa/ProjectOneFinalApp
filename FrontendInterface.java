@@ -29,6 +29,7 @@ public class FrontendInterface {
     }
     Scanner keyboard = new Scanner(System.in);
     while (true) {
+      System.out.println();
       System.out.println("List of Genres (Caps is selected):");
       for (int i = 0; i < backend.getAllGenres().size(); i++) {
         String current = backend.getAllGenres().get(i);
@@ -61,6 +62,7 @@ public class FrontendInterface {
     
     Scanner keyboard = new Scanner(System.in);
     while (true) {
+      System.out.println();
       System.out.println("List of Ratings (parentheses means selected):");
       for (int i = 0; i < 11; i++) {
         if (selectedRatings.contains(i))
@@ -90,6 +92,7 @@ public class FrontendInterface {
   private void baseMode(Backend backend) {
     Scanner keyboard = new Scanner(System.in);
     String key = "1";
+    System.out.println();
     System.out.println("Top Movies: ");
     System.out.println("(Search by ranking by entering number)");
     System.out.println();
@@ -132,6 +135,7 @@ public class FrontendInterface {
         ratingMode(backend);
         return;
       } else
+        System.out.println();
         System.out.println("Top Movies: ");
       try {
         System.out.println(Integer.parseInt(key) + ". "
