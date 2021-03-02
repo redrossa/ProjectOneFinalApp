@@ -28,13 +28,12 @@ MovieDataReader.class: Movie.java MovieDataReader.java
 
 compile: Main.class Frontend.class Backend.class MovieDataReader.class
 
-test: compile testData testBackend testFrontend
+test: compile testData testBackend 
 
-testFrontend: 
-	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
+# No front end tests needed as they were in the proposal 
 
 testBackend: Backend.class TestBackend.class
-	java $(CP) TestBackEnd
+	java $(CP) TestBackend
 	
 TestBackend.class: TestBackend.java
 	javac $(CP) TestBackend.java
