@@ -33,7 +33,7 @@ Instructions to Build, Run and Test your Project:
 "make compile" then "make run"  or just "make run" will build and run the program
 
 "make test" will show test outputs for DataInput and BackEnd 
-**Front end tests were ommited by Developers because they were in the project proposal**
+**Front end tests were ommited by Developers because they were in the project proposal and weren't changed since original submission.**
 
 Instructions for using Program: 
 1. 
