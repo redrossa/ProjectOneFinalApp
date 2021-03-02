@@ -8,10 +8,6 @@ public class FrontendInterface {
 
   public void main(String[] args) throws IOException {
     Backend backend = new Backend(args);
-    try {
-      Runtime.getRuntime().exec("clear");
-    } catch (Exception e) {
-    }
     System.out.println("Welcome to the Movie Database");
     System.out.println("=============================");
     backend.addGenre("all");
@@ -30,10 +26,6 @@ public class FrontendInterface {
     backend.removeGenre("all");
     for (int i = 0; i < backend.getAllGenres().size(); i++) {
       selectedGenres.add("");
-    }
-    try {
-      Runtime.getRuntime().exec("clear");
-    } catch (IOException e) {
     }
     Scanner keyboard = new Scanner(System.in);
     while (true) {
@@ -68,11 +60,6 @@ public class FrontendInterface {
   private void ratingMode(Backend backend) {
     
     Scanner keyboard = new Scanner(System.in);
-    try {
-      System.out.println("clear");
-      Runtime.getRuntime().exec("clear");
-    } catch (IOException e) {
-    }
     while (true) {
       System.out.println("List of Ratings (parentheses means selected):");
       for (int i = 0; i < 11; i++) {
@@ -130,10 +117,6 @@ public class FrontendInterface {
     } catch (Exception e) {
     }
     key = keyboard.nextLine();
-    try {
-      Runtime.getRuntime().exec("clear");
-    } catch (IOException e) {
-    }
     while (!key.equalsIgnoreCase("g") || !key.equalsIgnoreCase("r") || !key.equalsIgnoreCase("x")) {
       if (key.equalsIgnoreCase("x")) {
         System.out.println("Thank you, Come Again");
@@ -177,10 +160,6 @@ public class FrontendInterface {
       } catch (Exception e) {
       }
       key = keyboard.nextLine();
-      try {
-        Runtime.getRuntime().exec("clear");
-      } catch (IOException e) {
-      }
     }
     if (key.equalsIgnoreCase("x")) {
       System.exit(0);
