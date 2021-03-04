@@ -3,6 +3,7 @@ CP := -cp "opencsv-5.3.jar:commons-text-1.9.jar:commons-logging-1.2.jar:commons-
 default: run
 
 run: compile
+
 	java $(CP) Main movies.csv
 
 # Main.class requires Frontend.class
